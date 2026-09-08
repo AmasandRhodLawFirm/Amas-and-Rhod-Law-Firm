@@ -70,6 +70,24 @@ const attorneys = [
     ],
     memberships: ["Nigerian Bar Association"],
   },
+  {
+    name: "Mercy Odigue",
+    credentials: "LL.B, B.L",
+    title: "Administrative and Client Relations Officer",
+    image: "/images/mercy-odigue.webp",
+    admissions: [],
+    education: [
+      "LL.B, University of Benin",
+      "B.L, Nigerian Law School",
+    ],
+    practiceAreas: ["Administration", "Client Relations"],
+    bio: [
+      "Mercy Odigue is a legal practitioner and currently serves as the Administrative and Client Relations Officer at the firm. In her role, she contributes to the efficient coordination of the firm's administrative operations and plays an important role in maintaining positive and professional relationships with clients.",
+      "With a background in law and a strong interest in effective communication and client relations, Mercy is committed to ensuring that clients have a smooth and professional experience in their interactions with the firm.",
+      "Beyond her professional responsibilities, Mercy is passionate about writing and believes that even the most ordinary moments of everyday life have stories worth telling. Her interest in storytelling reflects her appreciation for communication, expression, and the unique experiences that shape people's lives.",
+    ],
+    memberships: [],
+  },
 ];
 
 export default function Attorneys() {
@@ -110,7 +128,7 @@ export default function Attorneys() {
           padding: 80px 16px;
         }
         .atty-inner {
-          max-width: 900px;
+          max-width: 1100px;
           margin: 0 auto;
         }
         .atty-header {
@@ -119,7 +137,7 @@ export default function Attorneys() {
         }
         .atty-header h1 {
           font-size: clamp(2rem, 5vw, 3rem);
-          font-family: 'Garamond', 'Georgia', serif;
+          font-family: 'Cormorant Garamond', 'Georgia', serif;
           font-weight: 700;
           color: #111827;
           margin: 0 0 12px;
@@ -167,7 +185,7 @@ export default function Attorneys() {
           text-align: center;
         }
         .atty-card-name {
-          font-family: 'Garamond', 'Georgia', serif;
+          font-family: 'Cormorant Garamond', 'Georgia', serif;
           font-size: 1.2rem;
           font-weight: 700;
           color: #111827;
@@ -268,7 +286,7 @@ export default function Attorneys() {
         }
         .modal-top-text { flex: 1; min-width: 0; }
         .modal-top-name {
-          font-family: 'Garamond', 'Georgia', serif;
+          font-family: 'Cormorant Garamond', 'Georgia', serif;
           font-size: 1.25rem;
           font-weight: 700;
           color: #111827;
@@ -412,7 +430,14 @@ export default function Attorneys() {
             {/* Sticky header */}
             <div className="modal-top">
               <div className="modal-thumb">
-                <Image src={selected.image} alt={selected.name} fill style={{ objectFit: "cover" }} />
+                <Image
+                  src={selected.image}
+                  alt={selected.name}
+                  fill
+                  sizes="72px"
+                  style={{ objectFit: "cover" }}
+                  unoptimized
+                />
               </div>
               <div className="modal-top-text">
                 <p className="modal-top-name">{selected.name}</p>
@@ -432,12 +457,14 @@ export default function Attorneys() {
                 ))}
               </div>
 
-              <div className="modal-section">
-                <p className="modal-section-label">Admissions</p>
-                <ul className="modal-list">
-                  {selected.admissions.map((a, i) => <li key={i}>{a}</li>)}
-                </ul>
-              </div>
+              {selected.admissions.length > 0 && (
+                <div className="modal-section">
+                  <p className="modal-section-label">Admissions</p>
+                  <ul className="modal-list">
+                    {selected.admissions.map((a, i) => <li key={i}>{a}</li>)}
+                  </ul>
+                </div>
+              )}
 
               <div className="modal-section">
                 <p className="modal-section-label">Education</p>
@@ -455,14 +482,16 @@ export default function Attorneys() {
                 </div>
               </div>
 
-              <div className="modal-section">
-                <p className="modal-section-label">Professional Memberships</p>
-                <div className="modal-tags">
-                  {selected.memberships.map((m, i) => (
-                    <span key={i} className="modal-tag">{m}</span>
-                  ))}
+              {selected.memberships.length > 0 && (
+                <div className="modal-section">
+                  <p className="modal-section-label">Professional Memberships</p>
+                  <div className="modal-tags">
+                    {selected.memberships.map((m, i) => (
+                      <span key={i} className="modal-tag">{m}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
             </div>
           </div>

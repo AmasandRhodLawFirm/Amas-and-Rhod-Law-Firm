@@ -38,7 +38,12 @@ const components = {
   },
   listItem: {
     bullet: ({ children }) => <li className="leading-relaxed">{children}</li>,
-    number: ({ children }) => <li className="leading-relaxed">{children}</li>
+    number: ({ children, value }) => (
+      <li
+        id={(value.children || []).map((span) => span.text || "").join("").trim().startsWith("Complaints Process") ? "complaints-process" : undefined}
+        className="leading-relaxed scroll-mt-28"
+      >{children}</li>
+    )
   },
   marks: {
     strong: ({ children }) => (

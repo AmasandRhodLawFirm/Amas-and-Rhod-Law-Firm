@@ -1,130 +1,63 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import { getArticlePresentation } from "../src/data/articlePresentation";
 
-export default function BlogPostGrid({
-  posts = [],
-  showAll = false,
-  maxPosts = 3
-}) {
-  if (!posts || posts.length === 0) {
-    return (
-      <section className="bg-gray-50 py-20 px-6 text-center">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-garamond md:text-5xl font-bold mb-12 text-gray-800">
-            Latest Insights
-          </h2>
-          <p className="text-gray-600">No blog posts available.</p>
-        </div>
-      </section>
-    );
-  }
-
-  // Show all posts if showAll is true, otherwise limit to maxPosts
-  const postsToShow = showAll ? posts : posts.slice(0, maxPosts);
+export default function BlogPostGrid({ posts = [], showAll = false, maxPosts = 3 }) {
+  const readablePosts = (posts || []).filter((post) => post.slug?.current);
+  const postsToShow = showAll ? readablePosts : readablePosts.slice(0, maxPosts);
+  const Heading = showAll ? "h1" : "h2";
 
   return (
-    <section className="bg-gray-50 py-20 px-6">
+    <section className="insights-section" aria-labelledby="insights-heading">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-garamond md:text-5xl font-bold mb-12 text-gray-800 text-center">
-          Latest Insights
-        </h2>
-        <div style={{
-            background: "#fefce8",
-            borderLeft: "4px solid #ca8a04",
-            padding: "14px 24px",
-            margin: "24px auto",
-            maxWidth: "900px",
-            borderRadius: "6px",
-            fontSize: "0.875rem",
-            color: "#78350f",
-            lineHeight: "1.6",
-          }}>
-            <strong>Disclaimer:</strong> Articles published on this site are for educational and
-            insights purposes <strong>ONLY</strong> and should not be construed as legal advice.
-            For legal advice and guidance regarding your situation, please{" "}
-            
-            <a href="/contact"
-              style={{ color: "#92400e", textDecoration: "underline", fontWeight: 600 }}
-            >
-              book an appointment
-            </a>.
+        <div className="section-heading">
+          <div>
+            <Heading id="insights-heading">Latest Insights</Heading>
+            <p>Perspectives on the legal matters shaping your world.</p>
           </div>
-        {/* Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {postsToShow.map((post, index) => (
-            <Link
-              key={post._id || index}
-              href={`/blog/${post.slug?.current || "#"}`}
-              className="group"
-            >
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 h-full flex flex-col">
-                {/* Image or Gradient Background */}
-                {post.mainImage?.asset?.url ? (
-                  <div className="relative h-64 w-full">
-                    <Image
-                      src={post.mainImage.asset.url}
-                      alt={post.title || "Blog post"}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-64 w-full bg-gradient-to-br from-blue-950 to-blue-800 flex items-center justify-center">
-                    <div className="text-white text-center p-6">
-                      <h3 className="text-2xl font-garamond font-bold">
-                        {post.title || "Untitled Post"}
-                      </h3>
-                    </div>
-                  </div>
-                )}
-
-                {/* Content */}
-                <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-2xl font-garamond font-bold mb-3 text-gray-800 group-hover:text-blue-950 transition-colors">
-                    {post.title || "Untitled Post"}
-                  </h3>
-
-                  <p className="text-gray-600 mb-4 flex-1 line-clamp-3">
-                    {post.body?.[0]?.children?.[0]?.text?.substring(0, 120) ||
-                      "Click to read more about this post..."}
-                    ...
-                  </p>
-
-                  {/* Read More Link */}
-                  <div className="flex items-center text-blue-950 font-semibold group-hover:text-blue-800">
-                    Read More
-                    <svg
-                      className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
+          {!showAll && readablePosts.length > maxPosts && (
+            <Link href="/blog" className="section-link">
+              All insights <ArrowUpRight size={20} aria-hidden="true" />
             </Link>
-          ))}
+          )}
         </div>
 
-        {/* View All Button - Only show on landing page when there are more posts */}
-        {!showAll && posts.length > maxPosts && (
-          <div className="text-center mt-12">
-            <Link
-              href="/blog"
-              className="inline-block bg-blue-950 text-white font-semibold py-3 px-8 rounded-full hover:bg-blue-900 transition duration-300"
-            >
-              View All Posts
-            </Link>
+        {postsToShow.length ? (
+          <div className="insights-grid">
+            {postsToShow.map((post) => {
+              const presentation = getArticlePresentation(post);
+              const published = post.publishedAt ? new Date(post.publishedAt) : null;
+              const validDate = published && !Number.isNaN(published.getTime());
+              return (
+                <article key={post._id || post.slug.current} className="insight-card">
+                  <Link href={`/blog/${post.slug.current}`} className="insight-card__link">
+                    <div className={`insight-card__image${presentation.contain ? " insight-card__image--artwork" : ""}`}>
+                      <Image src={presentation.image} alt={presentation.imageAlt} fill
+                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 420px" />
+                    </div>
+                    <div className="insight-card__body">
+                      <div className="insight-card__meta">
+                        <span>{presentation.category}</span>
+                        {validDate && <time dateTime={published.toISOString()}>{published.toLocaleDateString("en-GB", {
+                          day: "numeric", month: "short", year: "numeric", timeZone: "UTC",
+                        })}</time>}
+                      </div>
+                      <h3>{post.title || "Untitled Post"}</h3>
+                      {presentation.excerpt && <p>{presentation.excerpt}</p>}
+                      <span className="section-link">Read article <ArrowUpRight size={18} aria-hidden="true" /></span>
+                    </div>
+                  </Link>
+                </article>
+              );
+            })}
           </div>
-        )}
+        ) : <p className="text-gray-600 py-8">No blog posts available.</p>}
+
+        <p className="insights-disclaimer">
+          <strong>Disclaimer:</strong> Articles published on this site are for educational and insights purposes <strong>ONLY</strong> and should not be construed as legal advice.
+          For legal advice and guidance regarding your situation, please <Link href="/contact">book an appointment</Link>.
+        </p>
       </div>
     </section>
   );

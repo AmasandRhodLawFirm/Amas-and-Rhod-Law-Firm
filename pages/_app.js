@@ -60,11 +60,8 @@ function MyApp({ Component, pageProps }) {
         {/* Robots Meta Tag */}
         <meta name="robots" content="index, follow" />
 
-        {/* Google Font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap"
-          rel="stylesheet"
-        />
+        <link rel="preload" href="/fonts/cormorant-garamond-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
         {/* Structured Data */}
         <script

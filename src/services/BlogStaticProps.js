@@ -9,6 +9,7 @@ export async function getStaticProps() {
     slug,
     publishedAt,
     mainImage {
+      alt,
       asset -> { url }
     },
     body,

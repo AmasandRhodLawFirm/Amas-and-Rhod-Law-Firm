@@ -16,26 +16,27 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-gray-50 sticky top-0 z-20 text-blue-950 py-6 px-8 shadow-lg">
+    <header className="bg-gray-50 fixed w-full top-0 z-20 text-blue-950 py-4 px-6 border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo and Name */}
         <Link href="/" className="flex items-center space-x-3">
           <img
             src="/logo.png"
-            alt="Honoredge Legal Practice Logo"
+            alt="Amas & Rhod Law home"
             className="h-14 w-auto"
           />
           {/* <span className="font-bold hidden md:block text-xl tracking-wide">Honoredge Legal Practice</span> */}
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-8">
+        <nav aria-label="Main navigation" className="hidden lg:flex items-center gap-6">
           {navItems.map((item, idx) => (
             <Link
               key={idx}
               href={item.href}
               target={item.target?item.target:""}
-              className="relative group font-semibold tracking-wide hover:text-blue-800 transition-colors"
+              rel={item.target ? "noopener noreferrer" : undefined}
+              className="relative font-semibold text-sm hover:text-blue-800 transition-colors"
             >
               {item.name}
               {/* <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-950 transition-all group-hover:w-full"></span> */}
@@ -62,7 +63,11 @@ export default function Header() {
         {/* Mobile Menu Toggle Button */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-blue-950 focus:outline-none"
+          type="button"
+          aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-navigation"
+          className="lg:hidden text-blue-950 p-2"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -70,7 +75,7 @@ export default function Header() {
 
       {/* Mobile Nav Links */}
       {menuOpen && (
-        <div className="md:hidden mt-4 px-4 py-4 bg-gray-50 rounded-lg text-blue-950 space-y-4 transition-all">
+        <nav id="mobile-navigation" aria-label="Mobile navigation" className="lg:hidden mt-4 px-4 py-4 bg-gray-50 text-blue-950 space-y-4">
           <Link
             href="/"
             className="font-semibold block"
@@ -83,6 +88,7 @@ export default function Header() {
               key={idx}
               href={item.href}
               target={item.target?item.target:""}
+              rel={item.target ? "noopener noreferrer" : undefined}
               className="block font-semibold hover:text-blue-800"
               onClick={() => setMenuOpen(false)}
             >
@@ -104,7 +110,7 @@ export default function Header() {
               </Link>
             )
           )} */}
-        </div>
+        </nav>
       )}
     </header>
   );

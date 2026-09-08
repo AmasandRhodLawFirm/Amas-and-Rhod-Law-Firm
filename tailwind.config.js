@@ -14,7 +14,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        garamond: ['"EB Garamond"', 'serif'],
+        sans: ['Inter', 'Arial', 'sans-serif'],
+        garamond: ['"Cormorant Garamond"', 'Georgia', 'serif'],
       },  
     },
   },

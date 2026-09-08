@@ -5,9 +5,9 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="bg-gray-100 text-gray-800 py-16 px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-10">
         {/* Logo and Firm Name */}
-        <div className="flex flex-col items-center md:items-start mb-4">
+        <div className="flex flex-col items-start mb-4">
           <Image
             src={logo}
             alt="Amas & Rhod Law logo"
@@ -20,9 +20,9 @@ export default function Footer() {
           </h4>
 
           {/* Social Links */}
-          <div className="space-y-4 mt-6">
+          <div className="space-y-4 mt-6 w-full">
             <h4 className="text-xl font-garamond mb-4 md:mb-2">Follow Us</h4>
-            <div className="flex justify-center md:justify-start space-x-6 text-2xl">
+            <div className="flex justify-center md:justify-start items-center w-full space-x-6 text-2xl">
               <a
                 href="https://www.linkedin.com/company/amasandrhodlaw/"
                 target="_blank"
@@ -65,7 +65,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               target="_blank"
               title="Amas & Rhod Law profile on SoundBetter"
-              className="inline-block"
+              className="flex items-center w-full justify-center md:justify-start"
             >
               <img
                 alt="Amas & Rhod Law on SoundBetter"
@@ -95,7 +95,7 @@ export default function Footer() {
               +234 913 756 5593 <br />
             </a>
           </p>
-          <p className="text-lg">
+          <p className="text-base break-words">
             Email:{" "}
             <a
               href="mailto:info@amasandrhodlaw.com"
@@ -120,19 +120,34 @@ export default function Footer() {
 
         {/* Policies and Terms */}
         <div className="space-y-2 flex flex-col">
-          <h4 className="text-lg font-semibold mb-4">Legal</h4>
-          <ul className="space-y-2">
+          <h4 className="text-2xl font-semibold mb-4">Legal</h4>
+          <ul className="space-y-3">
             <li>
               <Link
-                href="/policy"
-                className="text-gray-800 hover:text-gray-700"
+                href="/policy/our-terms-of-service"
+                className="text-gray-800 hover:underline underline-offset-4"
               >
-                Privacy & Policies
+                Terms of Service
               </Link>
             </li>
             <li>
-              <Link href="/terms" className="text-gray-800 hover:text-gray-700">
-                Terms of Service
+              <Link href="/policy/our-retainer-policy" className="hover:underline underline-offset-4">
+                Retainer Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/policy/our-client-interview-policy" className="hover:underline underline-offset-4">
+                Client Interview Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/policy/our-data-protection-privacy-and-confidentiality-policy-privacy-notice" className="hover:underline underline-offset-4">
+                GDPR Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/policy/our-client-interview-policy#complaints-process" className="hover:underline underline-offset-4">
+                Complaints Policy
               </Link>
             </li>
           </ul>

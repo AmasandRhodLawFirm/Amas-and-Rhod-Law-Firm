@@ -1,11 +1,8 @@
 "use client";
 import Image from "next/image";
 // import BlogList from "./BlogList";
-import { useInView } from "framer-motion";
 import Layout from "../components/Layout";
-import { useAnimation } from "framer-motion";
-import { focusAreas } from "../src/data/focusArea";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { testimonials } from "../src/data/testimonial";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -15,6 +12,8 @@ import latestWebinarFlyer from "../public/latest_webinar_flyer.jpg";
 import pastWebinarFlyer from "../public/webinar.png";
 import LinkedInFeed from "../components/LinkedInFeed";
 import GalleryMarquee from "../components/GalleryMarquee";
+import HomeHero from "../components/HomeHero";
+import PracticeAreasSection from "../components/PracticeAreasSection";
 import BlogPostGrid from "./BlogPostSlider";
 import TwitterFeed from "../components/TwitterFeed";
 
@@ -80,50 +79,17 @@ export default function Home({ posts }) {
     setCurrentWebinarIndex((prev) => (prev + 1) % pastWebinars.length);
   };
 
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true }); // animate only once
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
-
   return (
     <Layout>
       <div className="font-sans text-gray-800 w-full">
         <main className="">
           {/* Hero Section */}
-          <section className="relative h-screen w-full">
-            <Image
-              src="/hero.png"
-              alt="Amas & Rhod Law hero"
-              fill
-              priority
-              className="object-cover object-center z-0"
-            />
-            <div className="absolute inset-0 bg-black bg-opacity-60 z-10 flex flex-col items-center justify-center text-center text-white px-4">
-              <h1 className="text-5xl md:text-6xl font-garamond font-bold mb-6 leading-tight">
-                Amas & Rhod Law
-              </h1>
-              <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
-                Law in action. Protection in motion; Our Lawyers are working!
-              </p>
-              <a
-                href="https://calendly.com/amasandrhodlaw-info/new-meeting"
-                target="_blank"
-                className="bg-white text-black font-semibold py-3 px-8 rounded-full hover:bg-blue-100 transition duration-300"
-              >
-                Book Appointment
-              </a>
-            </div>
-          </section>
+          <HomeHero />
 
           {/* About Section */}
-          <section id="about" className="py-24 bg-gray-50 px-6">
+          <section id="about" className="py-12 md:py-16 bg-gray-50 px-6">
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="flex items-start">
+              <div className="hidden md:flex items-start">
                 <Image
                   src="/logo.png"
                   alt="Amas & Rhod Law Logo"
@@ -145,102 +111,7 @@ export default function Home({ posts }) {
             </div>
           </section>
 
-          {/* Practice Areas */}
-          <section
-            id="practice-areas"
-            className="bg-blue-950 text-white py-24 px-6 md:px-20"
-          >
-            {" "}
-            <div className="max-w-7xl mx-auto text-center">
-              {" "}
-              <h2 className="text-4xl font-garamond md:text-5xl font-bold mb-6">
-                Our{" "}
-                <span className="text-black italic">Areas of Focus</span>{" "}
-              </h2>{" "}
-              <p className="text-gray-400 text-lg mb-16">
-                Expertise across key fields to meet your unique legal
-                needs.{" "}
-              </p>{" "}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                {" "}
-                {focusAreas.map((area, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-white/5 backdrop-blur-sm rounded-lg p-6 hover:bg-white/10 transition duration-300"
-                  >
-                    <h3 className="text-2xl font-garamond font-bold mb-4 text-white">
-                      {area.title}
-                    </h3>
-                    <p className="text-gray-300 text-sm leading-relaxed">
-                      {area.description}
-                    </p>
-                  </div>
-                ))}{" "}
-              </div>{" "}
-              <div className="mt-12">
-                <a
-                  href="/focus-areas"
-                  className="inline-block bg-white text-blue-950 font-semibold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300"
-                >
-                  View All Practice Areas
-                </a>
-              </div>
-            </div>{" "}
-          </section>
-
-          {/* Why Choose Us */}
-          <section className="py-24 bg-primary-100 text-black px-6">
-            <div className="max-w-7xl mx-auto text-center">
-              <h2 className="text-4xl font-garamond font-bold mb-12">
-                Why Partner With Us?
-              </h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Card 1 */}
-                <div className="relative rounded-xl overflow-hidden shadow-lg">
-                  <Image
-                    src="/mission.png"
-                    alt="Dispute Resolution"
-                    width={600}
-                    height={256}
-                    className="w-full h-[22rem] object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur-sm p-4">
-                    <h3 className="text-2xl font-semibold font-garamond mb-4">
-                      Our Mission
-                    </h3>
-                    <p className="text-sm text-gray-700 text-center mt-2">
-                      To empower clients with practical and top-tier legal
-                      solutions,delivered with conﬁdence, insight, and strategic
-                      clarity. We are committed to protecting our clients&apos;
-                      interests, preventing disputes, and providing decisive
-                      representation across every legal challenge.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Card 2 */}
-                <div className="relative rounded-xl overflow-hidden shadow-lg">
-                  <Image
-                    src="/tingey.png"
-                    alt="Corporate & Commercial Law"
-                    width={600}
-                    height={256}
-                    className="w-full h-[22rem] object-cover"
-                  />
-                  <div className="absolute bottom-0 left-0 w-full bg-white/90 backdrop-blur-sm p-4">
-                    <h3 className="text-2xl font-semibold font-garamond mb-4">
-                      Our Values
-                    </h3>
-                    <p className="text-sm text-gray-700 text-center mt-2">
-                      Guided by transparency, accountability, and a client-first
-                      ethos, we are committed to securing the best outcomes for
-                      those we serve.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+          <PracticeAreasSection />
 
           {/* Testimonials */}
           <section className="bg-blue-950 py-24 px-6 md:px-16 text-center overflow-hidden">
@@ -307,25 +178,6 @@ export default function Home({ posts }) {
             </div>
           </section>
 
-          {/* Call to Action */}
-          <section
-            id="contact"
-            className="bg-primary-200 text-white py-24 px-4 text-center"
-          >
-            <h2 className="text-4xl font-garamond font-bold mb-6">
-              Let's Get Started
-            </h2>
-            <p className="mb-8 text-lg max-w-2xl mx-auto">
-              Ready to take the next step? Contact us today to discuss how we
-              can support your legal journey.
-            </p>
-            <a
-              href="/contact"
-              className="bg-white text-black font-semibold py-3 px-8 rounded-full hover:bg-blue-100 transition duration-300"
-            >
-              Contact Us
-            </a>
-          </section>
           {/* Blog */}
           <BlogPostGrid posts={posts} showAll={false} maxPosts={3} />
 

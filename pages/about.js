@@ -102,7 +102,7 @@ export default function AboutUs() {
               },
               {
                 title: "Our Values",
-                text: "Integrity, diligence, excellence, empathy, and innovation are the core principles that guide every aspect of our practice.",
+                text: "Integrity, diligence, excellence, empathy, and innovation are the core principles that guide every aspect of our practice. Guided by transparency, accountability, and a client-first ethos, we are committed to securing the best outcomes for those we serve.",
                 image: "/values.png"
               }
             ].map((item, i) => (
