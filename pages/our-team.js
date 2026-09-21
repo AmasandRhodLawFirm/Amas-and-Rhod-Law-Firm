@@ -90,7 +90,7 @@ const attorneys = [
   },
 ];
 
-export default function Attorneys() {
+export default function OurTeam() {
   const [selected, setSelected] = useState(null);
   const [visible, setVisible] = useState(false);
 

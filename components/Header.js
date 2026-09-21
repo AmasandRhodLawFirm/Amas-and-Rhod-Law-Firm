@@ -8,7 +8,7 @@ export default function Header() {
 
   const navItems = [
     { name: "About", href: "/about" },
-    { name: "Our Team", href: "/attorneys" },
+    { name: "Our Team", href: "/our-team" },
     { name: "Practice Areas", href: "/focus-areas" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
