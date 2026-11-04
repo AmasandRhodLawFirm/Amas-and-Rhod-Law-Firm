@@ -10,6 +10,7 @@ import { getStaticProps } from "../src/services/BlogStaticProps";
 // import TwitterFeed from "../components/TwitterFeed";
 import latestWebinarFlyer from "../public/latest_webinar_flyer.jpg";
 import pastWebinarFlyer from "../public/webinar.png";
+import recentWebinarFlyer from "../public/images/entertainment-law-music-business-webinar.webp";
 import LinkedInFeed from "../components/LinkedInFeed";
 import GalleryMarquee from "../components/GalleryMarquee";
 import HomeHero from "../components/HomeHero";
@@ -20,6 +21,13 @@ import TwitterFeed from "../components/TwitterFeed";
 export { getStaticProps };
 
 const pastWebinars = [
+  {
+    image: recentWebinarFlyer,
+    alt: "Entertainment Law and the Music Business webinar flyer",
+    title: "Entertainment Law & The Music Business",
+    description:
+      "Our entertainment law webinar examined the legal and commercial sides of the creative industry and music business.",
+  },
   {
     image: pastWebinarFlyer,
     alt: "Entertainment Law Webinar: Your Rights as a Creative",

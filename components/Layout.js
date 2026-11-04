@@ -20,7 +20,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import ScrollToTopButton from "./ScrollToTopButton";
-import UpcomingWebinar from "./UpcomingWebinar";
 import ContactCallToAction from "./ContactCallToAction";
 
 const Layout = ({ children }) => {
@@ -28,7 +27,6 @@ const Layout = ({ children }) => {
     <div className="overflow-x-hidden w-full max-w-full">
       <Header />
       <main className="overflow-x-hidden w-full max-w-full pt-24">{children}</main>
-      <UpcomingWebinar />
       <ContactCallToAction />
       <ScrollToTopButton />
       <Footer />

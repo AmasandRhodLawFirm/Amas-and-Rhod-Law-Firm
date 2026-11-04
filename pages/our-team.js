@@ -70,24 +70,6 @@ const attorneys = [
     ],
     memberships: ["Nigerian Bar Association"],
   },
-  {
-    name: "Mercy Odigue",
-    credentials: "LL.B, B.L",
-    title: "Administrative and Client Relations Officer",
-    image: "/images/mercy-odigue.webp",
-    admissions: [],
-    education: [
-      "LL.B, University of Benin",
-      "B.L, Nigerian Law School",
-    ],
-    practiceAreas: ["Administration", "Client Relations"],
-    bio: [
-      "Mercy Odigue is a legal practitioner and currently serves as the Administrative and Client Relations Officer at the firm. In her role, she contributes to the efficient coordination of the firm's administrative operations and plays an important role in maintaining positive and professional relationships with clients.",
-      "With a background in law and a strong interest in effective communication and client relations, Mercy is committed to ensuring that clients have a smooth and professional experience in their interactions with the firm.",
-      "Beyond her professional responsibilities, Mercy is passionate about writing and believes that even the most ordinary moments of everyday life have stories worth telling. Her interest in storytelling reflects her appreciation for communication, expression, and the unique experiences that shape people's lives.",
-    ],
-    memberships: [],
-  },
 ];
 
 export default function OurTeam() {
